@@ -2,6 +2,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    """Настройки приложения. Читает переменные из .env файла."""
+
     # pydantic_settings читает из .env автоматически
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

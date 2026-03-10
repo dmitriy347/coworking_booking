@@ -1,15 +1,20 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException, status
 from app.repositories.user import UserRepository
-from app.schemas.user import UserCreate, UserUpdate, UserResponse
+from app.schemas.user import UserCreate, UserResponse
 from app.core.security import hash_password
 
 
 class UserService:
+    """
+    Бизнес-логика для пользователей.
+    Использует UserRepository для работы с БД.
+    """
     def __init__(self, db: AsyncSession):
         self.repo = UserRepository(db)
 
     async def register(self, user_data: UserCreate) -> UserResponse:
+        """Регистрирует нового пользователя. Проверяет уникальность email и хеширует пароль."""
         # 1. Проверяем что email свободен
         existing = await self.repo.get_by_email(user_data.email)
         if existing:
@@ -17,7 +22,6 @@ class UserService:
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Пользователь с таким email уже существует"
             )
-
         # 2. Хешируем пароль
         hashed = hash_password(user_data.password)
 
@@ -33,6 +37,7 @@ class UserService:
         return UserResponse.model_validate(user)
 
     async def get_by_id(self, user_id: int) -> UserResponse:
+        """Возвращает пользователя по id."""
         user = await self.repo.get_by_id(user_id)
         if not user:
             raise HTTPException(
@@ -42,5 +47,6 @@ class UserService:
         return UserResponse.model_validate(user)
 
     async def get_all(self) -> list[UserResponse]:
+        """Возвращает список всех пользователей."""
         users = await self.repo.get_all()
         return [UserResponse.model_validate(u) for u in users]

@@ -11,6 +11,6 @@ AsyncSessionLocal = async_sessionmaker(bind=engine, expire_on_commit=False)
 
 # 3. Dependency для роутеров
 async def get_db() -> AsyncSession:
-    """Зависимость для получения асинхронной сессии базы данных"""
+    """Dependency для роутеров. Создаёт сессию БД на время запроса и закрывает после."""
     async with AsyncSessionLocal() as session:
         yield session  # именно yield, а не return - FastAPI автоматически закроет сессию сам
