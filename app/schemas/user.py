@@ -23,6 +23,6 @@ class UserResponse(UserBase):
     is_admin: bool
     created_at: datetime
 
-    # from_attributes: True нужен только в схемах которые ты возвращаешь из роутера (Response схемы)
+    # from_attributes: True - нужен только в схемах, которые ты возвращаешь из роутера (Response схемы)
     # Что бы Pydantic умел читать не только ключи словаря, но и атрибуты объекта
     model_config = {"from_attributes": True}

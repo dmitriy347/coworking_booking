@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String, Boolean, func
-from datetime import datetime
 from app.models.base import Base
 
 class User(Base):
