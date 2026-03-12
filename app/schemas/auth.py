@@ -16,4 +16,4 @@ class TokenResponse(BaseModel):
 
 class RefreshRequest(BaseModel):
     """Схема запроса на обновление access токена."""
-    refresh: str
+    refresh_token: str
