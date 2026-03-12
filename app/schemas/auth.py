@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class LogitRequest(BaseModel):
+class LoginRequest(BaseModel):
     """Схема запроса на вход."""
     email: str
     password: str
