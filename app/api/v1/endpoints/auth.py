@@ -9,7 +9,7 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/login", response_model=TokenResponse)
 async def login(login_data: LoginRequest, db: AsyncSession = Depends(get_db)):
-    """Вход по email и паролю."""
+    """Вход по email и паролю. Выдаёт access + refresh токены."""
     service = AuthService(db)
     return await service.login(login_data)
 
