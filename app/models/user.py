@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Boolean, func
 from app.models.base import Base
 
@@ -13,3 +13,6 @@ class User(Base):
     last_name: Mapped[str] = mapped_column(String(100))
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
+
+    # Связь с бронированием
+    bookings: Mapped[list["Booking"]] = relationship(back_populates="user")
