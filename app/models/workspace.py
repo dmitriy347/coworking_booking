@@ -11,7 +11,7 @@ class Workspace(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
-    description: Mapped[str] = mapped_column(Text, nullable=False)
+    description: Mapped[str | None] = mapped_column(Text, nullable=True)
     type: Mapped[WorkspaceType] = mapped_column(
         sa.Enum(WorkspaceType, name="workspacetype")
     )
