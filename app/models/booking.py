@@ -17,7 +17,7 @@ class Booking(Base):
     start_time: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     end_time: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     status: Mapped[BookingStatus] = mapped_column(
-        sa.Enum(BookingStatus, name="booking_status"),
+        sa.Enum(BookingStatus, name="bookingstatus"),
         default=BookingStatus.PENDING,
         nullable=False,
     )
