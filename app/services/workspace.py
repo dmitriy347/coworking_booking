@@ -48,10 +48,9 @@ class WorkspaceService:
                 detail="Рабочее место не найдено"
             )
         # Затем обновляем его поля
-        workspace = await self.repo.update(
-            workspace,
-            **data.model_dump(exclude=True)
-        )
+        # data.model_dump(exclude=True) - конвертирует Pydantic-схему в словарь, исключая поля со значением None
+        upgrade_data = data.model_dump(exclude_unset=True)
+        workspace = await self.repo.update(workspace, **upgrade_data)
         return WorkspaceResponse.model_validate(workspace)
 
     async def delete(self, workspace_id: int) -> None:
