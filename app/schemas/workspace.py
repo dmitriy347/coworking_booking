@@ -13,7 +13,7 @@ class Workspace(BaseModel):
     price_per_hour: Decimal
 
 
-class WorkspaceCreate(BaseModel):
+class WorkspaceCreate(Workspace):
     """Схема для создания рабочего места. Только для админов."""
     pass
 
