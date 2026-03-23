@@ -33,7 +33,7 @@ class WorkspaceService:
             )
         return WorkspaceResponse.model_validate(workspace)
 
-    async def get_all(self, only_active: bool =True) -> list[WorkspaceResponse]:
+    async def get_all(self, only_active: bool=True) -> list[WorkspaceResponse]:
         """Возвращает список рабочих мест. По умолчанию только активные."""
         workspaces = await self.repo.get_workspace_all(only_active=only_active)
         return [WorkspaceResponse.model_validate(w) for w in workspaces]
