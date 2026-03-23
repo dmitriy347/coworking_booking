@@ -24,4 +24,4 @@ class Booking(Base):
 
     # Связи
     user: Mapped["User"] = relationship(back_populates="bookings")
-    workspace: Mapped["Workspace"] = relationship(back_populates="workspace")
+    workspace: Mapped["Workspace"] = relationship(back_populates="bookings")
